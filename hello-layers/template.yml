@@ -55,8 +55,6 @@ Resources:
             Method: get
             ApiId:
               Ref: MainAPI
-            Auth:
-              Authorizer: NONE
       Runtime: nodejs18.x
     Metadata:
       BuildMethod: esbuild
@@ -83,8 +81,6 @@ Resources:
             Method: get
             ApiId:
               Ref: MainAPI
-            Auth:
-              Authorizer: NONE
       Runtime: nodejs18.x
     Metadata:
       BuildMethod: esbuild
