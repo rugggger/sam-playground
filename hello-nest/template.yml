@@ -7,12 +7,12 @@ Parameters:
     Type: String
     Default: 'Development'
 Resources:
-  TextProcessorLayer:
+  NestLayer:
     Type: AWS::Serverless::LayerVersion
     Properties:
-      LayerName: TextProcessorLayer
-      Description: Text processor dependencies
-      ContentUri: 'layers/text-processor-layer/'
+      LayerName: NestLayer
+      Description: Nest dependencies
+      ContentUri: 'layers/nest-layer/'
       CompatibleRuntimes:
         - nodejs18.x
     Metadata:
@@ -40,18 +40,18 @@ Resources:
         AllowOrigins:
           - "*"
       FailOnWarnings: true
-  SlugifyFunction:
+  HelloLambdaSimple:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: lambdas/slugify
-      Handler: app.slugifyFunction
+      CodeUri: lambdas/hello-lambda/src
+      Handler: app.handler
       Layers:
-        - !Ref TextProcessorLayer
+        - !Ref NestLayer
       Events:
         ApiEvent:
           Type: HttpApi
           Properties:
-            Path: /slugify/{slug}
+            Path: /simple
             Method: get
             ApiId:
               Ref: MainAPI
@@ -65,19 +65,19 @@ Resources:
         EntryPoints:
           - app.ts
         External:
-          - "/opt/nodejs/node_modules/slugify"
-  CustomSlugifyFunction:
+          - "/opt/nodejs/node_modules"
+  HelloLambda:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: lambdas/custom-slugify
-      Handler: app.customSlugifyFunction
+      CodeUri: lambdas/hello-lambda/src
+      Handler: serverless.handler2
       Layers:
-        - !Ref TextProcessorLayer
+        - !Ref NestLayer
       Events:
         ApiEvent:
           Type: HttpApi
           Properties:
-            Path: /custom-slugify/{slug}
+            Path: /nest
             Method: get
             ApiId:
               Ref: MainAPI
@@ -91,4 +91,4 @@ Resources:
         EntryPoints:
           - app.ts
         External:
-          - "/opt/nodejs/customCode"
+          - "/opt/nodejs/node_modules"

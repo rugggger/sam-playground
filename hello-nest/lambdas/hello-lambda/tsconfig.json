@@ -18,9 +18,8 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "/opt/nodejs/customCode": [
-        "../../layers/nest-layer/customCode"
-      ],
+      "*": ["../../layers/nest-layer/node_modules/*"], // Redirect all module resolutions to the custom directory
+      "@app/*": ["src/*"] // Optionally, define other paths for your application code
     }
   },
   "exclude": ["node_modules", "**/*.test.ts"],
