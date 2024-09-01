@@ -70,7 +70,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: lambdas/hello-lambda/src
-      Handler: serverless.handler2
+      Handler: serverless.handler
       Layers:
         - !Ref NestLayer
       Events:
@@ -89,6 +89,6 @@ Resources:
         Target: "es2020"
         Sourcemap: true
         EntryPoints:
-          - app.ts
+          - serverless.ts
         External:
           - "/opt/nodejs/node_modules"
