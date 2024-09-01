@@ -1,0 +1,12 @@
+version = 0.1
+[default.deploy.parameters]
+s3_prefix = "sam-test"
+s3_bucket = "sam-test-rugggger"
+stack_name = "sam-test"
+region = "eu-west-1"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"
+image_repositories = []
+parameter_overrides = "Environment=\"staging\""
+profile = "yaron"
+
